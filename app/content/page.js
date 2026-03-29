@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 
 const API = "https://the-grey-dairy-mr-black-ai-production.up.railway.app";
