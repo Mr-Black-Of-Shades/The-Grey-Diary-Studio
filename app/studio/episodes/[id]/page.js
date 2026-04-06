@@ -7,18 +7,28 @@ const API = "https://the-grey-dairy-mr-black-ai.onrender.com";
 
 export default function EpisodePage() {
   const params = useParams();
-  const id = params.id;
-
-  if (!id) return null;
+  const id = params?.id; // ✅ safe access
 
   const [blocks, setBlocks] = useState([]);
   const [media, setMedia] = useState([]);
-  
-  
+
+  // ✅ SAFE LOADING STATE (IMPORTANT FOR VERCEL)
+  if (!id) {
+    return (
+      <div style={{ padding: 20 }}>
+        <p>Loading episode...</p>
+      </div>
+    );
+  }
+
   useEffect(() => {
+    if (!id) return; // ✅ extra safety
+
     fetch(`${API}/studio/content/${id}`)
       .then(res => res.json())
-      .then(setBlocks);
+      .then((data) => {
+        if (Array.isArray(data)) setBlocks(data);
+      });
 
     fetch(`${API}/studio/media`)
       .then(res => res.json())
@@ -32,6 +42,7 @@ export default function EpisodePage() {
   };
 
   const addText = () => setBlocks([...blocks, { type: "text", content: "" }]);
+
   const addVideo = () => setBlocks([...blocks, { type: "video", content: "" }]);
 
   const deleteBlock = (i) => {
@@ -44,7 +55,10 @@ export default function EpisodePage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ episode_id: Number(id), blocks }),
+      body: JSON.stringify({
+        episode_id: Number(id),
+        blocks,
+      }),
     });
 
     alert("Saved ✅");
@@ -60,7 +74,7 @@ export default function EpisodePage() {
           {b.type === "text" && (
             <textarea
               className="input"
-              value={b.content}
+              value={b.content || ""}
               onChange={(e) => updateBlock(i, e.target.value)}
             />
           )}
@@ -71,11 +85,11 @@ export default function EpisodePage() {
               value={b.content || ""}
               onChange={(e) => updateBlock(i, e.target.value)}
             >
-              <option>Select Video</option>
+              <option value="">Select Video</option>
 
               {media
-                .filter(m => m.type === "video")
-                .map(m => (
+                .filter((m) => m.type === "video")
+                .map((m) => (
                   <option key={m.id} value={m.file_id}>
                     Video #{m.id}
                   </option>
@@ -83,7 +97,10 @@ export default function EpisodePage() {
             </select>
           )}
 
-          <button className="btn btn-danger" onClick={() => deleteBlock(i)}>
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteBlock(i)}
+          >
             Delete
           </button>
         </div>
