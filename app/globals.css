@@ -1,23 +1,45 @@
 body {
   margin: 0;
-  font-family: system-ui, Arial;
-  background: #f7f7f7;
+  font-family: system-ui;
+  background: #0f0f10;
+  color: #fff;
 }
 
+/* Layout */
 .container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
 }
 
+/* Navbar */
+.nav {
+  display: flex;
+  gap: 20px;
+  padding: 16px 20px;
+  background: #18181b;
+  border-bottom: 1px solid #2a2a2e;
+}
+
+.nav a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* Cards */
 .card {
-  background: white;
+  background: #18181b;
+  border: 1px solid #2a2a2e;
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 12px;
-  border: 1px solid #eee;
 }
 
+/* Buttons */
 .btn {
   padding: 10px 16px;
   border-radius: 8px;
@@ -26,27 +48,22 @@ body {
 }
 
 .btn-primary {
-  background: black;
-  color: white;
+  background: #ffffff;
+  color: #000;
 }
 
 .btn-danger {
-  background: red;
+  background: #ff3b3b;
   color: white;
 }
 
+/* Inputs */
 .input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.nav {
-  display: flex;
-  gap: 16px;
-  padding: 16px;
-  border-bottom: 1px solid #eee;
-  background: white;
+  border: 1px solid #2a2a2e;
+  background: #111;
+  color: white;
 }
