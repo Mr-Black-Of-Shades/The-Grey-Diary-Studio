@@ -9,9 +9,11 @@ export default function EpisodePage() {
   const params = useParams();
   const id = params.id;
 
+  if (!id) return null;
+
   const [blocks, setBlocks] = useState([]);
   const [media, setMedia] = useState([]);
-
+  
   
   useEffect(() => {
     fetch(`${API}/studio/content/${id}`)
