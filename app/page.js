@@ -1,5 +1,15 @@
-import { redirect } from "next/navigation";
+export default function Dashboard() {
+  return (
+    <div>
+      <h1>🖤 Grey Diary Studio</h1>
 
-export default function Home() {
-  redirect("/studio");
+      <div className="card">
+        <p>Control your entire storytelling system.</p>
+      </div>
+
+      <a href="/studio/episodes">
+        <button className="btn btn-primary">Go to Episodes →</button>
+      </a>
+    </div>
+  );
 }
