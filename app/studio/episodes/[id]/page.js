@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 const API = "https://the-grey-dairy-mr-black-ai.onrender.com";
 
-export default function EpisodePage({ params }) {
-  const { id } = params;
+export default function EpisodePage() {
+  const params = useParams();
+  const id = params.id;
 
   const [blocks, setBlocks] = useState([]);
   const [media, setMedia] = useState([]);
 
+  
   useEffect(() => {
     fetch(`${API}/studio/content/${id}`)
       .then(res => res.json())
