@@ -1,25 +1,15 @@
-export const metadata = {
-  title: "Grey Diary Studio",
-  description: "Creator Dashboard",
-};
+import "../globals.css";
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0, fontFamily: "Arial" }}>
-        <nav
-          style={{
-            padding: 15,
-            borderBottom: "1px solid #ddd",
-            display: "flex",
-            gap: 20,
-          }}
-        >
+    <html>
+      <body>
+        <div className="nav">
           <a href="/studio">Dashboard</a>
           <a href="/studio/episodes">Episodes</a>
-        </nav>
+        </div>
 
-        <div style={{ padding: 20 }}>{children}</div>
+        <div className="container">{children}</div>
       </body>
     </html>
   );
